@@ -1,0 +1,17 @@
+package encryption;
+
+import java.math.BigDecimal;
+import java.security.SecureRandom;
+import java.util.Random;
+
+public class hello {
+
+	public static int prime() {
+		// TODO Auto-generated method stub
+		SecureRandom random=new SecureRandom();
+		
+		System.out.println(random);
+		return 0;
+	}
+
+}

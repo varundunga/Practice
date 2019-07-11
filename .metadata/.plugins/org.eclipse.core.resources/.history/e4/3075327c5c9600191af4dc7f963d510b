@@ -1,0 +1,86 @@
+package evoke.practice.JsonParser;
+
+import java.io.FileInputStream;
+
+import org.apache.commons.net.ftp.FTPClient;
+
+public class Ftpserver {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	       FTPClient client = new FTPClient();
+	       
+	       FileInputStream fis = null;
+	       
+	      
+	       try {
+	      
+	      
+	     client.connect("ftp.javacodegeeks.com");
+	      
+	      
+	     client.login("username", "password");
+	       
+	      
+	      
+	      
+	      
+	      
+	     // Create an InputStream of the file to be uploaded
+	      
+	      
+	     String filename = "test.txt";
+	      
+	      
+	     fis = new FileInputStream(filename);
+	       
+	      
+	      
+	     // Store file on server and logout
+	      
+	      
+	     client.storeFile(filename, fis);
+	      
+	      
+	     client.logout();
+	      
+	      
+	      
+	      
+	       } catch (IOException e) {
+	      
+	      
+	     e.printStackTrace();
+	      
+	       } finally {
+	      
+	      
+	     try {
+	      
+	      
+	         if (fis != null) {
+	      
+	      
+	      
+	       fis.close();
+	      
+	      
+	         }
+	      
+	      
+	         client.disconnect();
+	      
+	      
+	     } catch (IOException e) {
+	      
+	      
+	         e.printStackTrace();
+	      
+	      
+	     }
+	      
+	       }
+	}
+
+}

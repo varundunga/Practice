@@ -1,0 +1,16 @@
+package evoke.practice.JsonParser;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class stringtojs {
+	
+	public static JSONObject stringtojson(String str) throws ParseException{
+		JSONParser p=new JSONParser();
+		JSONObject jb=(JSONObject) p.parse(str);
+		return jb;
+		
+	}
+
+}

@@ -1,0 +1,25 @@
+package restApi;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
+
+public class JiraCreateIssue {
+	public static void main(String[] args) {
+
+		RestAssured.baseURI = "http:\\localhost:8080";
+		Response res=given().header("cookie", Authentication.cookie()).and()
+				.body("{ \"fields\": {" + "\"project\": {" + "\"id\": \"10000\"" + "}," + "\"summary\": \" wrong\","
+						+ "\"issuetype\": {" + " \"id\": \"10000\"" + " }," + " \"assignee\": {"
+						+ "  \"name\": \"homer\"" + " }," + " \"reporter\": {" + "  \"name\": \"smithers\"" + " }" + "}"
+						+ "}")
+				.when().post("/rest/api/2/issue").
+				then().assertThat().statusCode(200).and().extract().response();
+		String resp=res.asString();
+		System.out.println(resp);
+	}
+
+}

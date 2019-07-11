@@ -1,0 +1,25 @@
+package encryption;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class Encryption {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		System.out.println("Enter encryption algorithm(AES/RSA):");
+		BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+		String algType=reader.readLine();
+		while(!(algType.equalsIgnoreCase("AES")||algType.equalsIgnoreCase("RSA")))
+		{
+			System.out.println("Enter encryption algorithm(AES/RSA):");
+			reader=new BufferedReader(new InputStreamReader(System.in));
+			algType=reader.readLine();
+		}
+		
+	}
+
+}

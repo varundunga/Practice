@@ -1,0 +1,9 @@
+package jira;
+
+public class createIssue {
+	
+	public static void main(String[] args){
+		
+		System.out.println(Authentication.cookie());
+	}
+}

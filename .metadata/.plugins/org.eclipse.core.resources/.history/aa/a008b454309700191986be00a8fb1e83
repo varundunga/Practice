@@ -1,0 +1,10 @@
+package jira;
+
+import io.restassured.RestAssured;
+
+public class Authentication {
+	
+	RestAssured. = "https://www.googleapis.com//customsearch//v1";
+
+	String cookie="cookie:JSESSIONID-4F389792D10E298EFBB6BAEF86FEBE99";
+}

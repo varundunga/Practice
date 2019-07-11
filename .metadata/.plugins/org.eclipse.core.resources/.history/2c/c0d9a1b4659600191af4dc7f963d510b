@@ -1,0 +1,111 @@
+package evoke.practice.JsonParser;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.apache.commons.net.ftp.FTPClient;
+
+public class Ftpserver {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		
+	       FTPClient client = new FTPClient();
+	       FileInputStream fis = null;
+		    
+		  
+		  
+		    
+		    FileOutputStream fos=null;
+	       
+	       
+	       
+	      
+	       try {
+	      
+	      
+	     client.connect("ftp.dlptest.com");
+	      
+	      
+	     client.login("dlpuser@dlptest.com", "fLDScD4Ynth0p4OJ6bW6qCxjh");
+	       
+	      
+	      
+	      
+	      
+	      
+	     // Create an InputStream of the file to be uploaded
+	      
+	      
+	     String filename = "C:\\Users\\vdunga\\Desktop\\destvarun.dlp";
+	             
+	    fis = new FileInputStream(filename);
+	    
+	    //String filename1="testvarun.dlp";
+	  
+	    
+	    fos=new FileOutputStream(filename);
+	    
+	       
+	      
+	      
+	     // Store file on server and logout
+	      
+	      
+	     client.storeFile(filename, fis);
+	     client.retrieveFile(filename,fos);
+	     String delete="destvarun.dlp";
+	     boolean exist=client.deleteFile(delete);
+	     if(exist)
+	     {
+	    	 System.out.println("file deleted");
+	     }
+	     else
+	     {
+	    	 System.out.println("file not found");
+	     }
+	      
+	     client.logout();
+	      
+	      
+	      
+	      
+	       } catch (IOException e) {
+	      
+	      
+	     e.printStackTrace();
+	      
+	       } finally {
+	      
+	      
+	     try {
+	      
+	      
+	         if (fis!= null) {
+	      
+	      
+	      fis.close();
+	       
+	      
+	      
+	         }
+	      
+	      
+	         client.disconnect();
+	      
+	      
+	     } catch (IOException e) {
+	      
+	      
+	         e.printStackTrace();
+	      
+	      
+	     }
+	      
+	       }
+	}
+
+}

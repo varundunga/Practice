@@ -1,0 +1,138 @@
+package evoke.practice.JsonParser;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.Scanner;
+
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class jsf3 {
+
+	public static void main(String[] args) throws ParseException, IOException {
+		// TODO Auto-generated method stub
+
+		String baseUrl = "https://core.redlion.com/api/windsurfer/availability?_format=json&Quantity=1&Start=2020-01-07&End=2020-01-10&Adults=1&HotelCode=WAABDN%2cWATWTR%2cBC1663%2cWAENUM";
+		System.setProperty("http.agent", "Chrome");
+		URL url = new URL(baseUrl);
+		Scanner sc = new Scanner(url.openStream());
+		String inline = "";
+		while (sc.hasNext()) {
+			inline += sc.nextLine();
+		}
+		sc.close();
+		JSONParser p = new JSONParser();
+		JSONObject jb = (JSONObject) p.parse(inline);
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet("Report");
+		String[] header = { "Hotel Name", "Room Code", "Room Name", "Occupancy", "Rate Code", "Room Rate", "Sub total",
+				"Taxes", "Total" };
+		int rownum = 0;
+		Row row = sheet.createRow(rownum++);
+		int cellnum = 0;
+		for (int i = 0; i < header.length; i++) {
+			Cell cell = row.createCell(cellnum++);
+			cell.setCellValue(header[i]);
+		}
+		Iterator<?> i = jb.keySet().iterator();
+		while (i.hasNext()) {
+			cellnum = 0;
+			String key = (String) i.next();
+			System.out.println("hotelname key is " + key);
+			String value = jb.get(key).toString();
+			JSONObject valuejb = Common.stringtojson(value);
+			String hotelname = valuejb.get("Name").toString();
+			System.out.println("hotelname is " + hotelname);
+			row = sheet.createRow(rownum++);
+			Cell cell = row.createCell(cellnum++);
+			cell.setCellValue(hotelname);
+
+			String hotelrooms = valuejb.get("Rooms").toString();
+			JSONObject hotelroomsjb = Common.stringtojson(hotelrooms);
+
+			Iterator<?> i1 = hotelroomsjb.keySet().iterator();
+			int y = cellnum;
+			while (i1.hasNext()) {
+				cellnum = y;
+				String key1 = (String) i1.next();
+				System.out.println("roomcode is " + key1);
+				cell = row.createCell(cellnum++);
+				cell.setCellValue(key1);
+				String value1 = hotelroomsjb.get(key1).toString();
+				JSONObject value1jb = Common.stringtojson(value1);
+				String hotelroomname = value1jb.get("Name").toString();
+				System.out.println("room name is " + hotelroomname);
+				cell = row.createCell(cellnum++);
+				cell.setCellValue(hotelroomname);
+				String Occupancy = value1jb.get("Occupancy").toString();
+				System.out.println("Occupancy is " + Occupancy);
+				cell = row.createCell(cellnum++);
+				cell.setCellValue(Occupancy);
+				String Rates = value1jb.get("Rates").toString();
+				JSONObject Ratesjb = Common.stringtojson(Rates);
+
+				Iterator<?> i2 = Ratesjb.keySet().iterator();
+				int x = cellnum;
+
+				while (i2.hasNext()) {
+					cellnum = x;
+					String key2 = (String) i2.next();
+					System.out.println("Rate code is " + key2);
+					cell = row.createCell(cellnum++);
+					cell.setCellValue(key2);
+					String value2 = Ratesjb.get(key2).toString();
+					JSONObject Ratecodejb = Common.stringtojson(value2);
+					String Roomrate = Ratecodejb.get("RoomRate").toString();
+					System.out.println("Roomrate is " + Roomrate);
+					cell = row.createCell(cellnum++);
+					cell.setCellValue(Roomrate);
+					String Subtotal = Ratecodejb.get("Subtotal").toString();
+					System.out.println("Subtotal is " + Subtotal);
+					cell = row.createCell(cellnum++);
+					cell.setCellValue(Subtotal);
+					String Taxes = Ratecodejb.get("Taxes").toString();
+					System.out.println("Taxes is " + Taxes);
+					cell = row.createCell(cellnum++);
+					cell.setCellValue(Taxes);
+					String Total = Ratecodejb.get("Total").toString();
+					System.out.println("Total is " + Total);
+					cell = row.createCell(cellnum++);
+					cell.setCellValue(Total);
+					row = sheet.createRow(rownum++);
+
+				}
+				row = sheet.createRow(rownum++);
+			}
+		}
+		
+		FileOutputStream fos = new FileOutputStream("Report.xlsx");
+		workbook.write(fos);
+		workbook.close();
+		try
+		{
+		FileInputStream fis=new FileInputStream("Report.xlsx");
+		FTPClient ftp=new FTPClient();
+		ftp.connect("\\rbfs1\\public\\Evoke_Testing");
+		ftp.login("rb.net\\vdunga", "2019D0rm@n");
+		ftp.storeUniqueFile(fis);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		}
+		
+
+	}
+
+}

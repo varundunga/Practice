@@ -1,0 +1,90 @@
+package evoke.practice.JsonParser;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.commons.net.ftp.FTPClient;
+
+public class Ftpserver {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		System.setProperty("java.net.preferIPv4Stack", "false");
+		System.setProperty("java.net.preferIPv6Addresses", "false");
+		
+	       FTPClient client = new FTPClient();
+	       
+	       FileInputStream fis = null;
+	       
+	      
+	       try {
+	      
+	      
+	     client.connect("ftp://speedtest.tele2.net/");
+	      
+	      
+	     client.login("anonymous", "fLDScD4Ynth0p4OJ6bW6qCxjh");
+	       
+	      
+	      
+	      
+	      
+	      
+	     // Create an InputStream of the file to be uploaded
+	      
+	      
+	     String filename = "C:\\Users\\vdunga\\DesktopReport1.xlsx";
+	      
+	      
+	     fis = new FileInputStream(filename);
+	       
+	      
+	      
+	     // Store file on server and logout
+	      
+	      
+	     client.storeFile(filename, fis);
+	      
+	      
+	     client.logout();
+	      
+	      
+	      
+	      
+	       } catch (IOException e) {
+	      
+	      
+	     e.printStackTrace();
+	      
+	       } finally {
+	      
+	      
+	     try {
+	      
+	      
+	         if (fis != null) {
+	      
+	      
+	      
+	       fis.close();
+	      
+	      
+	         }
+	      
+	      
+	         client.disconnect();
+	      
+	      
+	     } catch (IOException e) {
+	      
+	      
+	         e.printStackTrace();
+	      
+	      
+	     }
+	      
+	       }
+	}
+
+}

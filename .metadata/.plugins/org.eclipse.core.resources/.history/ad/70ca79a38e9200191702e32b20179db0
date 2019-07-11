@@ -1,0 +1,86 @@
+package evoke.practice.JsonParser;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import io.restassured.path.json.JsonPath;
+
+public class jsf1 {
+
+	public static void main(String[] args) throws ParseException, IOException {
+		// TODO Auto-generated method stub
+
+		String baseUrl="https://core.redlion.com/api/windsurfer/availability?_format=json&Quantity=1&Start=2020-01-07&End=2020-01-10&Adults=1&HotelCode=WAABDN%2cWATWTR%2cBC1663%2cWAENUM";
+        System.setProperty("http.agent", "Chrome");
+				URL url=new URL(baseUrl);
+				/*HttpURLConnection req = (HttpURLConnection)url.openConnection();
+				req.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+				req.setRequestMethod("GET");*/
+				Scanner sc = new Scanner(url.openStream());
+				String inline1="";
+				StringBuffer inline=new StringBuffer();
+				while(sc.hasNext())
+				{
+				inline.append(sc.nextLine());
+				}
+				sc.close();
+				JSONParser p=new JSONParser();
+				JSONObject jb=(JSONObject) p.parse(inline);
+								
+				HashMap<String,JSONObject> hotellist=new HashMap<String,JSONObject>();
+				
+				Common.hashMap(jb, hotellist);
+				hotellist.forEach((k,v)->{
+					
+					String name=v.get("Name").toString();
+					System.out.println(name);
+					String rooms=v.get("Rooms").toString();
+					try {
+						JSONObject roomsj=Common.stringtojson(rooms);
+						//System.out.println(roomsj);
+						HashMap<String,JSONObject> hotelroom=new HashMap<String,JSONObject>();
+						Common.hashMap(roomsj, hotelroom);
+						hotelroom.forEach((k2,v2)->{
+							
+							String roomname=v2.get("Name").toString();
+							System.out.println(k2);
+							System.out.println(roomname);
+							String occupancy=v2.get("Occupancy").toString();
+							System.out.println(occupancy);
+							String rates=v2.get("Rates").toString();
+							try {
+								JSONObject ratesj=Common.stringtojson(rates);
+								HashMap<String,JSONObject> hotelroomrates=new HashMap<String,JSONObject>();
+								Common.hashMap(ratesj, hotelroomrates);
+								hotelroomrates.forEach((k3,v3)->{;
+									
+									String roomrate=v3.get("RoomRate").toString();
+									System.out.println(k3);
+									System.out.println(roomrate);
+								});
+								
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						});
+						
+						
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}	
+				});
+
+	}
+
+}

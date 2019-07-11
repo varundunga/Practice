@@ -1,0 +1,40 @@
+package encryption;
+
+import java.math.BigDecimal;
+import java.security.SecureRandom;
+import java.util.Random;
+
+public class hello {
+
+	public static int rand() {
+		// TODO Auto-generated method stub
+		Random random=new Random();
+		int x=random.nextInt();
+		while(isPrime(x))
+		{
+			x=random.nextInt();
+			
+		}
+		
+		int prime=isPrime(x);
+		return 0;
+	}
+	
+	boolean static isPrime(int x) 
+	{ 
+	    // Corner case 
+	    if (n <= 1)  return false; 
+	  
+	    // Check from 2 to n-1 
+	    for (int i=2; i<n; i++) 
+	    { 
+	    	if (n%i == 0) 
+	    { 
+	    	return false;
+	    } 
+	    
+	  
+	    return true; 
+	    }
+	} 
+}

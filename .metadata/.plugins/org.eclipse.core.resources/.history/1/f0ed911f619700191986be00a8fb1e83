@@ -1,0 +1,58 @@
+package encryption;
+
+import java.security.SecureRandom;
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+
+public class enc {
+
+	static Cipher cipher;
+	
+	public static void main(String[] args) throws Exception {
+				KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+				keyGenerator.init(128);
+				SecretKey secretKey = keyGenerator.generateKey();
+				byte iv[]=new byte[16];
+				SecureRandom random=new SecureRandom();
+				random.nextBytes(iv);
+				IvParameterSpec ivp=new IvParameterSpec(iv);
+				
+				cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+
+				String plainText = "AES Symmetric Encryption Decryption";
+				System.out.println("Plain Text Before Encryption: " + plainText);
+
+				String encryptedText = encrypt(plainText, secretKey);
+				System.out.println("Encrypted Text After Encryption: " + encryptedText);
+
+				String decryptedText = decrypt(encryptedText, secretKey);
+				System.out.println("Decrypted Text After Decryption: " + decryptedText);
+			}
+
+			public static String encrypt(String plainText, SecretKey secretKey,IvParameterSpec ivp)
+					throws Exception {
+				byte[] plainTextByte = plainText.getBytes();
+				cipher.init(Cipher.ENCRYPT_MODE, secretKey,ivp);
+				byte[] encryptedByte = cipher.doFinal(plainTextByte);
+				Base64.Encoder encoder = Base64.getEncoder();
+				String encryptedText = encoder.encodeToString(encryptedByte);
+				return encryptedText;
+			}
+
+			public static String decrypt(String encryptedText, SecretKey secretKey,IvParameterSpec ivp)
+					throws Exception {
+				Base64.Decoder decoder = Base64.getDecoder();
+				byte[] encryptedTextByte = decoder.decode(encryptedText);
+				cipher.init(Cipher.DECRYPT_MODE, secretKey,ivp);
+				byte[] decryptedByte = cipher.doFinal(encryptedTextByte);
+				String decryptedText = new String(decryptedByte);
+				return decryptedText;
+			}
+		
+	}
+
+

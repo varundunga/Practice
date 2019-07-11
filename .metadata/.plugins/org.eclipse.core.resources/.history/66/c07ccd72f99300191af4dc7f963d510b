@@ -1,0 +1,30 @@
+package restApi;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.given;
+import org.hamcrest.*;
+
+public class basics1 {
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		RestAssured.baseURI="https://www.googleapis.com/customsearch/v1";
+		Response res=given().
+		param("key","AIzaSyA56tTynxxy-7kEmRiAU1A56dk9ZRFmmBw").
+		param("cx","013955379900195856281:quje7hymsfw").
+		param("q","platini").
+		when().
+		get("").
+		then().assertThat().statusCode(200).and().body("kind", equalTo("customsearch#search"));
+		System.out.println(res);
+		
+		
+		
+		
+	}
+
+}

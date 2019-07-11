@@ -1,0 +1,23 @@
+package encryption;
+
+import java.util.Random;
+
+public class hello {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int q=0;
+		int p=0;
+		 
+		int maxValue = 100;
+		int maxNumber = 2;
+		 
+		Random x = new Random ();
+		 
+		for (int k=1; k < maxNumber; k ++) {
+		p = (Math.abs(x.nextInt () % maxValue ));}
+		 
+		System.out.println("p: "+p);
+	}
+
+}

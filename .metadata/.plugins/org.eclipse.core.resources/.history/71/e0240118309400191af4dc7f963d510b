@@ -1,0 +1,34 @@
+package evoke.practice.JsonParser;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+
+import jcifs.smb.NtlmPasswordAuthentication;
+import jcifs.smb.SmbException;
+import jcifs.smb.SmbFile;
+import jcifs.smb.SmbFileOutputStream;
+
+public class LocalToNetwork {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		String user="rb.net"+"\\"+"vdunga:2019D0rm@n";
+		NtlmPasswordAuthentication auth=new NtlmPasswordAuthentication(user);
+		SmbFile sfile=new SmbFile("file:\\"+"\\rbfs1\\public\\Evoke_Testing",auth);
+		SmbFileOutputStream sout=new SmbFileOutputStream(sfile);
+		FileInputStream fis=new FileInputStream("Report.xlsx");
+		byte[] buffer = new byte[4096];
+        int len = 0; //Read length
+        while ((len = fis.read(buffer, 0, buffer.length)) != -1) 
+        {
+            sout.write(buffer, 0, len);
+	
+        }
+        sout.close();
+        fis.close();
+	}
+}

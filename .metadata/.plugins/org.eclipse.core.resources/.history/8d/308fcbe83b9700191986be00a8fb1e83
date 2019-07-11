@@ -1,0 +1,24 @@
+package jira;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
+
+public class createIssue {
+
+	public static void main(String[] args) {
+
+		RestAssured.baseURI = "http://localhost:8080";
+		Response res=given().header("cookie", Authentication.cookie()).and()
+				.body("{ \"fields\": {" + "\"project\": {" + "\"key\": \"RT\"" + "}," + "\"summary\": \" wrong\","
+						+ "\"issuetype\": {" + " \"name\": \"Bug\"" + "}").log().all()
+				.when().post("/rest/api/2/issue").
+				then().assertThat().statusCode(201).and().extract().response();
+		String resp=res.asString();
+		System.out.println(resp);
+	}
+}

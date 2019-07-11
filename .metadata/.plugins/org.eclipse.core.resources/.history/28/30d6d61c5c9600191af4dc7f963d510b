@@ -1,0 +1,10 @@
+package evoke.practice.JsonParser;
+
+public class Ftpserver {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

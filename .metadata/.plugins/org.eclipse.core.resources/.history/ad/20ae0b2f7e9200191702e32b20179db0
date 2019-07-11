@@ -1,0 +1,68 @@
+package evoke.practice.JsonParser;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import io.restassured.path.json.JsonPath;
+
+public class jsf1 {
+
+	public static void main(String[] args) throws ParseException, IOException {
+		// TODO Auto-generated method stub
+
+		String baseUrl="https://core.redlion.com/api/windsurfer/availability?_format=json&Quantity=1&Start=2020-01-07&End=2020-01-10&Adults=1&HotelCode=WAABDN%2cWATWTR%2cBC1663%2cWAENUM";
+        System.setProperty("http.agent", "Chrome");
+				URL url=new URL(baseUrl);
+				/*HttpURLConnection req = (HttpURLConnection)url.openConnection();
+				req.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+				req.setRequestMethod("GET");*/
+				Scanner sc = new Scanner(url.openStream());
+				String inline="";
+				while(sc.hasNext())
+				{
+				inline+=sc.nextLine();
+				}
+				sc.close();
+				JSONParser p=new JSONParser();
+				JSONObject jb=(JSONObject) p.parse(inline);
+				//System.out.println(jb);
+				//JsonPath jp=new JsonPath(inline);
+				//jp.getList("$..");
+				
+						
+				
+				
+				HashMap<String,JSONObject> hotelroom=new HashMap<String,JSONObject>();
+				Iterator i=jb.keySet().iterator();
+				while(i.hasNext())
+				{
+					
+					String key=(String)i.next();
+					JSONObject value=(JSONObject) jb.get(key);
+					hotelroom.put(key, value);
+										
+				}
+				hotelroom.entrySet().forEach(a->{
+					JSONObject k=a.getValue();
+					String name=k.get("Name").toString();
+					System.out.println(name);
+					String rooms=k.get("Rooms").toString();
+					try {
+						JSONObject jx=stringtojs.stringtojson(rooms);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println(jx);
+				});
+	}
+
+}
