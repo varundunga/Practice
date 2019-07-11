@@ -4701,3 +4701,9 @@ Caused by: org.apache.http.client.HttpResponseException: Request has been forbid
 2019-07-08 13:28:52,529 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2019-07-11 13:28:30,919 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2019-07-11 13:28:42,547 [Worker-5] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: Evoke:Practice:0.0.1-SNAPSHOT @ C:\Users\vdunga\eclipse workspace\Practice\pom.xml.
+2019-07-11 13:28:45,990 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.sun.xml.bind:jaxb-osgi:jar:2.2.10 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
+2019-07-11 13:28:56,610 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.sun.xml.bind:jaxb-osgi:jar:2.2.10 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
+2019-07-11 13:28:58,008 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-11 13:28:58,011 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-07-11 13:28:58,013 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-11 13:28:58,014 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
