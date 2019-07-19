@@ -1,5 +1,0 @@
-package restApi;
-
-public class JiraCreateIssue {
-
-}
