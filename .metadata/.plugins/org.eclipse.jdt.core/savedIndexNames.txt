@@ -57,7 +57,6 @@ INDEX VERSION 1.130+C:\Users\vdunga\eclipse workspace\.metadata\.plugins\org.ecl
 4199404519.index
 2991899720.index
 3751741110.index
-2446798781.index
 1821101164.index
 3197688239.index
 1088714216.index

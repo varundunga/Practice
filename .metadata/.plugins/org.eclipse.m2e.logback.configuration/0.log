@@ -4985,3 +4985,11 @@ Caused by: org.apache.http.client.HttpResponseException: Request has been forbid
 2019-07-19 17:11:01,466 [Worker-79] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2019-07-19 17:11:01,469 [Worker-79] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2019-07-19 17:11:01,470 [Worker-79] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-07-19 18:06:15,580 [Worker-83] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-19 18:06:15,580 [Worker-83] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-07-19 18:06:15,581 [Worker-83] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-19 18:06:15,582 [Worker-83] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-07-19 18:06:16,634 [Worker-89] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-19 18:06:16,634 [Worker-89] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-07-19 18:06:16,636 [Worker-89] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-19 18:06:16,637 [Worker-89] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
